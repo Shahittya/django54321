@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+      <meta charset="utf-8">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js">
+</script>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <title>{% block title_block %} Blogs {% endblock %}</title>
+  </head>
+  <body>
+    <nav class="navbar navbar-expand-sm bg-dark navbar-dark">
+      <ul class="navbar-nav">
+        <li class="nav-item active">
+<a href="{% url 'index' %}" class="nav-link">Home</a>
+
+        </li>
+{% if user.is_authenticated %}
+<div class="nav-item dropdown">
+  <a href="#" class="nav-link dropdown-toggle" id="navbardrop" data-toggle="dropdown">
+@{{user.username}}
+
+  </a>
+
+<div class="dropdown-menu">
+  <a class="dropdown-item" href="{% url 'App_Blog:create_blog' %}">Write Blog</a>
+<a class="dropdown-item" href="{% url 'App_Login:profile' %}">Profile</a>
+<a class="dropdown-item" href="{% url 'App_Blog:my_blog' %}">My Blogs</a>
+
+<hr>
+<a class="dropdown-item" href="{% url 'App_Login:logout' %}">Logout</a>
+
+</div>
+</div>
+
+  {% else %}
+
+
+        <li class="nav-item">
+    <a href="{% url 'App_Login:signup' %}" class="nav-link">Sign Up</a>
+        </li>
+
+        <li class="nav-item">
+    <a href="{% url 'App_Login:login' %}" class="nav-link">Login</a>
+        </li>
+
+{% endif %}
+    </ul>
+</nav>
+    <div class="container" style="padding-top:20px">
+
+
+      {% block body_block %}
+
+      {% endblock %}
+
+    </div>
+  </body>
+</html>
